@@ -114,6 +114,8 @@ server.listen(port, () => { console.log(`app listening on port ${port}`) })
 ===========FUNCTIONS==========
 ============================*/
 
+const all_black_check = () => lp.buttons.every(button => button.color === black)
+
 // COMPARE TWO ARRAYS
 const arrCompare = (arr1, arr2) => arr1.every((item, ind) => item === arr2[ind])
 
@@ -205,47 +207,37 @@ const button_compare = (input) => {
 
 // PARENT CONNECTION
 io.on('connection', socket => {
-  let address = socket.handshake.address
-  if (address !== '::ffff:192.168.2.1') {
-    if (address_regex.test(address)) address = address.replace(address_regex, '$1')
-    console.log(`user connected from ${address}`)
+
+  // SET READABLE ADDRESS
+  let address = address_regex.test(socket.handshake.address)
+    ? socket.handshake.address
+      .replace(address_regex, '$1')
+    : socket.handshake.address
+
+  // LOG ADDRESS IF NOT LOCAL
+  if (address !== '::ffff:192.168.2.1') { 
+    console.log(`user connected from ${address}`) 
   }
 
   // EMIT STARTUP ON CONNECT
   io.emit('startup', map_buttons())
 
   // WEBSOCKET UPDATE ALL COLORS
-  socket.on('update', (btn_array) => {
-    if (!button_compare(btn_array)) {
-      set_all(btn_array)
+  socket.on('update', payload => {
+    // check to see if current state matches payload
+    if (!button_compare(payload)) {
+      set_all(payload)
       io.emit('update', map_buttons())
     } 
   })
 
-  // WEBSOCKET RINGS
-  socket.on('rings', (payload) => {
-    let start = map_buttons()
-    rings.forEach((ring, ind) => {
-      if (!ring.every(item => item.color === black)) {
-        ring.forEach(btn => {
-          let { x, y } = btn
-          let current = lp.buttons
-            .find(button => (button.x === x && button.y === y))
-          current.color = payload[ind]
-        })
-      }
-    })
-    let end = map_buttons()
-    if (!start.every((item, ind) => item.color === end[ind].color)) io.emit('rings', payload)
-    set_all()
-  })
-
   // HANDLE RESETS
-  socket.on('reset', (data) => {
-    if (!lp.buttons.every(button => button.color === black)) io.emit('reset')
+  socket.on('reset', () => {
+    if (!all_black_check()) io.emit('reset')
     lp.darkAll()
     reset_lights()
   })
+  
 })
 
 /*============================

@@ -91,13 +91,6 @@ const rings = [
   ]
 ]
 
-// RING ELEMENTS LIST
-const ring_inputs = [
-  document.getElementById('r0'),
-  document.getElementById('r1'),
-  document.getElementById('r2'),
-  document.getElementById('r3')
-]
 
 /*============================
 ===========FUNCTIONS==========
@@ -109,7 +102,7 @@ const reset_lights = () => {
     socket.emit('reset')
   }
   buttons.forEach(btn => btn.color = black)
-  ring_inputs.forEach(input => input.value = black)
+  // ring_inputs.forEach(input => input.value = black)
   update_dom()
 }
 
@@ -146,31 +139,7 @@ const element_onchange = () => {
       socket.emit('update', buttons)
     }
   })
-  // SET ONCHANGE FOR RING INPUTS
-  ring_inputs.forEach(ele => {
-    ele.onchange = () => { set_rings() }
-  })
 }
-const ring_values = () => ring_inputs.map(ele => ele.value)
-
-const set_rings = (incoming = false) => {
-  let colors = !!incoming
-    ? incoming
-    : ring_values()
-  rings.forEach((ring, ind) => {
-    if ( !ring.every(item => item.color === black) ) {
-      ring.forEach(item => {
-        let { x, y } = item
-        let found_button = buttons.find(button => (button.x === x && button.y === y))
-        found_button.color = colors[ind]
-      })
-      ring_inputs[ind].value = colors[ind]
-    }
-  })
-  update_dom()
-  if (!incoming) socket.emit('rings', colors)
-}
-
 
 /*============================
 ===========WEBSOCKET==========
@@ -188,10 +157,6 @@ socket.on('startup', (payload) => {
 socket.on('update', (payload) => {
   buttons = payload
   update_dom()
-})
-// WEBSOCKET COLOR CHANGE
-socket.on('rings', (payload) => {
-  set_rings(payload)
 })
 
 // WEBSOCKET RESET
