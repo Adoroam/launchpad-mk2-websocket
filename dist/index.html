@@ -11,20 +11,10 @@
 </head>
 <body>
   <div class="container">
-    <!-- <h2>Ado's Launchpad Websocket Project</h2>
-    <div class="lg launchpad-box">
-      <input type="color" id="lg" name="lg">
-      <div class="md launchpad-box">
-        <input type="color" id="md" name="md">
-        <div class="sm launchpad-box">
-          <input type="color" id="sm" name="sm">
-          <div class="xs launchpad-box">
-            <input type="color" id="xs" name="xs">
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <button onclick="socket.emit('reset')">reset</button>
+    <h2>Ado's Launchpad Websocket Project</h2>
+    <button onclick="lib.socket.emit('reset')">reset</button>
+    <button onclick="lib.toggle_edit()">toggle edit</button>
+    <input class="edit_notification" type="color" id="edit">
     <div class="grid">
       <!-- y8 -->
       <div class="grid-item"><input type="color" id="x1y8"></div>
@@ -98,16 +88,6 @@
       <div class="grid-item"><input type="color" id="x6y1"></div>
       <div class="grid-item"><input type="color" id="x7y1"></div>
       <div class="grid-item"><input type="color" id="x8y1"></div>
-      
-    </div>
-    <div>
-      <dl>
-        <dt>rings</dt>
-        <dd>center: <input type="color" id="r0"></dd>
-        <dd>inner: <input type="color" id="r1"></dd>
-        <dd>outer: <input type="color" id="r2"></dd>
-        <dd>border: <input type="color" id="r3"></dd>
-      </dl>
     </div>
   </div>
   <script src="main.js"></script>

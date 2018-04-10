@@ -20,32 +20,6 @@ h2 {
     box-sizing: border-box;
 }
 
-.launchpad-box {
-    border: 1px solid grey;
-    display: inline-block;
-    background: black;
-}
-
-.lg {
-    height: 200px;
-    width: 200px;
-}
-
-.md {
-    height: 150px;
-    width: 150px;
-}
-
-.sm {
-    height: 100px;
-    width: 100px;
-}
-
-.xs {
-    height: 50px;
-    width: 50px;
-}
-
 input[type="color"] {
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -54,7 +28,7 @@ input[type="color"] {
 .grid {
     display: grid;
     grid-template-columns: repeat(8, 50px);
-    grid-gap: 0.6em;
+    grid-gap: 0.55em;
     margin: 1em auto;
 }
 
@@ -62,7 +36,20 @@ input[type="color"] {
     height: 50px;
     width: 50px;
     margin: auto;
-    border: 1px solid grey;
+    border: 3px solid grey;
     border-radius: 2px;
     background: black;
+}
+.grid-item.selected {
+    border: 3px solid aquamarine;
+}
+
+.edit_notification {
+    height: 3em;
+    width: 3em;
+    background: black;
+}
+
+.edit_notification.edit {
+    background: aquamarine;
 }
