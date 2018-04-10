@@ -18,6 +18,7 @@ const black = '#000000'
 const id_coord = /^x(\d)y(\d)$/i
 
 const edit_input = document.getElementById('edit')
+const body_ele = document.getElementById('body')
 
 // ARRAY OF ALL ELEMENTS MAPPED TO XY
 let element_array
@@ -38,6 +39,23 @@ const multiselect = {
 ===========FUNCTIONS==========
 ============================*/
 
+// HANDLE KEYPRESS (BODY)
+export const handle_keypress = (ev) => {
+  let { code, ctrlKey } = ev
+  switch (code) {
+    case 'KeyS': 
+      toggle_edit()
+      toggle_edit()
+      break
+    case 'Space':
+      edit_input.click()
+      break
+    default: 
+      //
+  }
+}
+body_ele.onkeypress = handle_keypress
+
 // FUNCTION FOR ARRAY OF ALL ELEMENTS
 const create_element_array = () => lp.buttons.map(btn => {
   let { x, y } = btn
@@ -49,8 +67,8 @@ const update_dom = () => {
   lp.buttons.forEach((btn, ind) => {
     let { color } = btn
     let ele = element_array[ind]
-    ele.value = color
-    ele.parentElement.style.backgroundColor = color
+    ele.nodeValue = color
+    ele.style.backgroundColor = color
   })
 }
 
@@ -67,24 +85,23 @@ const get_id_xy = (ele) => {
 const element_onchange = () => {
   // SET ONCHANGE FOR INDIVIDUAL INPUTS
   element_array.forEach(ele => {
-    let parent = ele.parentElement
     ele.onchange = () => {
-      parent.style.backgroundColor = ele.value
+      ele.style.backgroundColor = ele.nodeValue
       let { x, y } = get_id_xy(ele)
       let button = button_by_coord(x, y, lp)
-      button.color = ele.value
+      button.color = ele.nodeValue
       socket.emit('update', lp)
     }
-    parent.onclick = () => {
+    ele.onclick = () => {
       if (multiselect.edit) {
         let coords = get_id_xy(ele)
-        if (parent.nodeValue === null) {
-          parent.classList.add('selected')
-          parent.nodeValue = 'selected'
+        if (ele.title === '') {
+          ele.classList.add('selected')
+          ele.title = 'selected'
           multiselect.coord_list.push(coords)
         } else {
-          parent.classList.remove('selected')
-          parent.nodeValue = null
+          ele.classList.remove('selected')
+          ele.title = ''
           let index = multiselect.coord_list.indexOf(coords)
           multiselect.coord_list.splice(index, 1)
         }
@@ -108,9 +125,10 @@ const element_onchange = () => {
 export const toggle_edit = () => {
   if (multiselect.edit) {
     edit_input.classList.remove('edit')
+    edit_input.value = black
     element_array.forEach(ele => {
-      ele.parentElement.classList.remove('selected')
-      ele.parentElement.nodeValue = null
+      ele.classList.remove('selected')
+      ele.title = ''
     })
     multiselect.coord_list = []
   } else {
@@ -121,11 +139,6 @@ export const toggle_edit = () => {
 
 // SAVE NEW REGION
 export const save_edit = () => {
-  // let new_region = {
-  //   color: multiselect.color,
-  //   coords: multiselect.coords
-  // }
-  // lp.regions.push(new_region)
   socket.emit('update', lp)
 }
 

@@ -9,7 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 </head>
-<body>
+<body id="body">
   <div class="container">
     <h2>Ado's Launchpad Websocket Project</h2>
     <button onclick="lib.socket.emit('reset')">reset</button>
@@ -17,77 +17,77 @@
     <input class="edit_notification" type="color" id="edit">
     <div class="grid">
       <!-- y8 -->
-      <div class="grid-item"><input type="color" id="x1y8"></div>
-      <div class="grid-item"><input type="color" id="x2y8"></div>
-      <div class="grid-item"><input type="color" id="x3y8"></div>
-      <div class="grid-item"><input type="color" id="x4y8"></div>
-      <div class="grid-item"><input type="color" id="x5y8"></div>
-      <div class="grid-item"><input type="color" id="x6y8"></div>
-      <div class="grid-item"><input type="color" id="x7y8"></div>
-      <div class="grid-item"><input type="color" id="x8y8"></div>
+      <div class="grid-item" id="x1y8"></div>
+      <div class="grid-item" id="x2y8"></div>
+      <div class="grid-item" id="x3y8"></div>
+      <div class="grid-item" id="x4y8"></div>
+      <div class="grid-item" id="x5y8"></div>
+      <div class="grid-item" id="x6y8"></div>
+      <div class="grid-item" id="x7y8"></div>
+      <div class="grid-item" id="x8y8"></div>
       <!-- y7 -->
-      <div class="grid-item"><input type="color" id="x1y7"></div>
-      <div class="grid-item"><input type="color" id="x2y7"></div>
-      <div class="grid-item"><input type="color" id="x3y7"></div>
-      <div class="grid-item"><input type="color" id="x4y7"></div>
-      <div class="grid-item"><input type="color" id="x5y7"></div>
-      <div class="grid-item"><input type="color" id="x6y7"></div>
-      <div class="grid-item"><input type="color" id="x7y7"></div>
-      <div class="grid-item"><input type="color" id="x8y7"></div>
+      <div class="grid-item" id="x1y7"></div>
+      <div class="grid-item" id="x2y7"></div>
+      <div class="grid-item" id="x3y7"></div>
+      <div class="grid-item" id="x4y7"></div>
+      <div class="grid-item" id="x5y7"></div>
+      <div class="grid-item" id="x6y7"></div>
+      <div class="grid-item" id="x7y7"></div>
+      <div class="grid-item" id="x8y7"></div>
       <!-- y6 -->
-      <div class="grid-item"><input type="color" id="x1y6"></div>
-      <div class="grid-item"><input type="color" id="x2y6"></div>
-      <div class="grid-item"><input type="color" id="x3y6"></div>
-      <div class="grid-item"><input type="color" id="x4y6"></div>
-      <div class="grid-item"><input type="color" id="x5y6"></div>
-      <div class="grid-item"><input type="color" id="x6y6"></div>
-      <div class="grid-item"><input type="color" id="x7y6"></div>
-      <div class="grid-item"><input type="color" id="x8y6"></div>
+      <div class="grid-item" id="x1y6"></div>
+      <div class="grid-item" id="x2y6"></div>
+      <div class="grid-item" id="x3y6"></div>
+      <div class="grid-item" id="x4y6"></div>
+      <div class="grid-item" id="x5y6"></div>
+      <div class="grid-item" id="x6y6"></div>
+      <div class="grid-item" id="x7y6"></div>
+      <div class="grid-item" id="x8y6"></div>
       <!-- y5 -->
-      <div class="grid-item"><input type="color" id="x1y5"></div>
-      <div class="grid-item"><input type="color" id="x2y5"></div>
-      <div class="grid-item"><input type="color" id="x3y5"></div>
-      <div class="grid-item"><input type="color" id="x4y5"></div>
-      <div class="grid-item"><input type="color" id="x5y5"></div>
-      <div class="grid-item"><input type="color" id="x6y5"></div>
-      <div class="grid-item"><input type="color" id="x7y5"></div>
-      <div class="grid-item"><input type="color" id="x8y5"></div>
+      <div class="grid-item" id="x1y5"></div>
+      <div class="grid-item" id="x2y5"></div>
+      <div class="grid-item" id="x3y5"></div>
+      <div class="grid-item" id="x4y5"></div>
+      <div class="grid-item" id="x5y5"></div>
+      <div class="grid-item" id="x6y5"></div>
+      <div class="grid-item" id="x7y5"></div>
+      <div class="grid-item" id="x8y5"></div>
       <!-- y4 -->
-      <div class="grid-item"><input type="color" id="x1y4"></div>
-      <div class="grid-item"><input type="color" id="x2y4"></div>
-      <div class="grid-item"><input type="color" id="x3y4"></div>
-      <div class="grid-item"><input type="color" id="x4y4"></div>
-      <div class="grid-item"><input type="color" id="x5y4"></div>
-      <div class="grid-item"><input type="color" id="x6y4"></div>
-      <div class="grid-item"><input type="color" id="x7y4"></div>
-      <div class="grid-item"><input type="color" id="x8y4"></div>
+      <div class="grid-item" id="x1y4"></div>
+      <div class="grid-item" id="x2y4"></div>
+      <div class="grid-item" id="x3y4"></div>
+      <div class="grid-item" id="x4y4"></div>
+      <div class="grid-item" id="x5y4"></div>
+      <div class="grid-item" id="x6y4"></div>
+      <div class="grid-item" id="x7y4"></div>
+      <div class="grid-item" id="x8y4"></div>
       <!-- y3 -->
-      <div class="grid-item"><input type="color" id="x1y3"></div>
-      <div class="grid-item"><input type="color" id="x2y3"></div>
-      <div class="grid-item"><input type="color" id="x3y3"></div>
-      <div class="grid-item"><input type="color" id="x4y3"></div>
-      <div class="grid-item"><input type="color" id="x5y3"></div>
-      <div class="grid-item"><input type="color" id="x6y3"></div>
-      <div class="grid-item"><input type="color" id="x7y3"></div>
-      <div class="grid-item"><input type="color" id="x8y3"></div>
+      <div class="grid-item" id="x1y3"></div>
+      <div class="grid-item" id="x2y3"></div>
+      <div class="grid-item" id="x3y3"></div>
+      <div class="grid-item" id="x4y3"></div>
+      <div class="grid-item" id="x5y3"></div>
+      <div class="grid-item" id="x6y3"></div>
+      <div class="grid-item" id="x7y3"></div>
+      <div class="grid-item" id="x8y3"></div>
       <!-- y2 -->
-      <div class="grid-item"><input type="color" id="x1y2"></div>
-      <div class="grid-item"><input type="color" id="x2y2"></div>
-      <div class="grid-item"><input type="color" id="x3y2"></div>
-      <div class="grid-item"><input type="color" id="x4y2"></div>
-      <div class="grid-item"><input type="color" id="x5y2"></div>
-      <div class="grid-item"><input type="color" id="x6y2"></div>
-      <div class="grid-item"><input type="color" id="x7y2"></div>
-      <div class="grid-item"><input type="color" id="x8y2"></div>
+      <div class="grid-item" id="x1y2"></div>
+      <div class="grid-item" id="x2y2"></div>
+      <div class="grid-item" id="x3y2"></div>
+      <div class="grid-item" id="x4y2"></div>
+      <div class="grid-item" id="x5y2"></div>
+      <div class="grid-item" id="x6y2"></div>
+      <div class="grid-item" id="x7y2"></div>
+      <div class="grid-item" id="x8y2"></div>
       <!-- y1 -->
-      <div class="grid-item"><input type="color" id="x1y1"></div>
-      <div class="grid-item"><input type="color" id="x2y1"></div>
-      <div class="grid-item"><input type="color" id="x3y1"></div>
-      <div class="grid-item"><input type="color" id="x4y1"></div>
-      <div class="grid-item"><input type="color" id="x5y1"></div>
-      <div class="grid-item"><input type="color" id="x6y1"></div>
-      <div class="grid-item"><input type="color" id="x7y1"></div>
-      <div class="grid-item"><input type="color" id="x8y1"></div>
+      <div class="grid-item" id="x1y1"></div>
+      <div class="grid-item" id="x2y1"></div>
+      <div class="grid-item" id="x3y1"></div>
+      <div class="grid-item" id="x4y1"></div>
+      <div class="grid-item" id="x5y1"></div>
+      <div class="grid-item" id="x6y1"></div>
+      <div class="grid-item" id="x7y1"></div>
+      <div class="grid-item" id="x8y1"></div>
     </div>
   </div>
   <script src="main.js"></script>
