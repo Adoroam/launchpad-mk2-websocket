@@ -1,0 +1,68 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    background: grey;
+}
+
+.container {
+    box-sizing: border-box;
+    width: 500px;
+    height: 100vh;
+    margin: 0 auto;
+    background: #e6e6e6;
+    padding: 1em;
+}
+
+h2 {
+    box-sizing: border-box;
+}
+
+.launchpad-box {
+    border: 1px solid grey;
+    display: inline-block;
+    background: black;
+}
+
+.lg {
+    height: 200px;
+    width: 200px;
+}
+
+.md {
+    height: 150px;
+    width: 150px;
+}
+
+.sm {
+    height: 100px;
+    width: 100px;
+}
+
+.xs {
+    height: 50px;
+    width: 50px;
+}
+
+input[type="color"] {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    grid-gap: 0.6em;
+    margin: 1em auto;
+}
+
+.grid-item {
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 2px;
+    background: black;
+}
