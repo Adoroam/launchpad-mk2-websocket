@@ -12,9 +12,20 @@
 <body id="body">
   <div class="container">
     <h2>Ado's Launchpad Websocket Project</h2>
-    <button onclick="lib.socket.emit('reset')">reset</button>
-    <button onclick="lib.toggle_edit()">toggle edit</button>
-    <input class="edit_notification" type="color" id="edit">
+    <p>Press <strong>E</strong> to select a color. <br/>Use the number keys to switch between different colors.</p>
+
+    <div class="brush-box">
+      <div class="brush selected" id="b_0">1</div>
+      <div class="brush" id="b_1">2</div>
+      <div class="brush" id="b_2">3</div>
+      <div class="brush" id="b_3">4</div>
+      <div class="brush" id="b_4">5</div>
+    </div>
+    <div class="brush-box">
+      <div class="brush" id="reset" onclick="lib.socket.emit('reset')">reset</div>
+      <!-- <div class="brush" id="eyedrop" onclick="lib.eyedrop()">eye-dropper</div> -->
+      <input type="color" id="color">
+    </div>
     <div class="grid">
       <!-- y8 -->
       <div class="grid-item" id="x1y8"></div>

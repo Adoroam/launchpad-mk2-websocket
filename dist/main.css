@@ -14,13 +14,16 @@ body {
     margin: 0 auto;
     background: #e6e6e6;
     padding: 1em;
+    text-align: left;
 }
 
 h2 {
     box-sizing: border-box;
+    text-align: center;
 }
 
 input[type="color"] {
+    display: none;
     border: none;
     background-color: rgba(0, 0, 0, 0);
 }
@@ -30,6 +33,7 @@ input[type="color"] {
     grid-template-columns: repeat(8, 50px);
     grid-gap: 0.55em;
     margin: 1em auto;
+    clear: left;
 }
 
 .grid-item {
@@ -40,16 +44,42 @@ input[type="color"] {
     border-radius: 2px;
     background: black;
 }
+
 .grid-item.selected {
     border: 3px solid aquamarine;
 }
 
-.edit_notification {
-    height: 3em;
-    width: 3em;
-    background: black;
+.brush-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    height: 4.6em;
+    text-align: center;
 }
 
-.edit_notification.edit {
-    background: aquamarine;
+.brush-box>div {
+    flex: 2
+}
+
+.brush-box button {
+    flex: 1;
+    height: 2em;
+    background: none;
+}
+
+.brush {
+    margin: 1em auto;
+    padding: 0.5em;
+    background: black;
+    /* display: inline-block; */
+    border: 3px solid grey;
+    color: white;
+}
+
+.brush.selected {
+    border: 3px solid aquamarine
+}
+
+#reset {
+    border: 3px solid red;
 }
