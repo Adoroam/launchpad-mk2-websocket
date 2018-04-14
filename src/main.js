@@ -4,6 +4,12 @@ import {
   button_by_coord
  } from "./fn";
 
+import {
+  is_valid_hex,
+  rgb_to_hex,
+  is_valid_rgb
+} from './rgb'
+
 /*============================
 ===========CONSTANTS==========
 ============================*/
@@ -29,15 +35,16 @@ let blank_brushes = [
 // COLOR INPUT
 const color_input = document.getElementById('color')
 
+// EYEDROPPER
+const eyedrop_ele = document.getElementById('eyedrop')
+
 // BODY ELEMENT
 const body_ele = document.getElementById('body')
-
-// EMPTY BRUSHES ARR
-const brushes = blank_brushes
 
 // ARRAY OF BRUSH ELEMENTS
 const brush_eles = blank_brushes.map((item, ind) => document.getElementById(`b_${ind}`))
 
+// SET ACTIVE BRUSH TO FIRST SLOT
 let active_brush = 0
 
 // ARRAY OF ALL ELEMENTS MAPPED TO XY
@@ -49,6 +56,8 @@ const lp = {
   buttons: []
 }
 
+// EYEDROP STATUS
+let eyedrop_status = false
 
 /*============================
 ===========FUNCTIONS==========
@@ -79,14 +88,6 @@ const create_element_array = () => lp.buttons.map(btn => {
   return document.getElementById(`x${x}y${y}`)
 })
 
-// UPDATE THE DOM WITH NEW VALUES
-const update_dom = () => {
-  element_array.forEach(ele => {
-    set_color(ele, false)
-  })
-  color_input.value = brushes[active_brush]
-}
-
 // get x y id
 const get_id_xy = (ele) => {
   let matches = ele.id.match(id_coord)
@@ -111,20 +112,40 @@ const set_color = (ele, update) => {
   } 
 }
 
+// CLICK FUNCTION TOGGLE
+const set_click_fns = () => {
+  if (!eyedrop_status) {
+    element_array.forEach(ele => {
+      ele.onclick = () => { set_color(ele, true) }
+    })
+  } else {
+    element_array.forEach(ele => {
+      ele.onclick = () => {
+        let ele_bg = ele.style.backgroundColor
+        if (is_valid_rgb(ele_bg)) ele_bg = rgb_to_hex(ele_bg)    
+        brushes[active_brush] = ele_bg
+        update_dom()
+      }
+    })
+  }
+}
+
 // SET ON CHANGE FOR MAIN LAUNCHPAD
 const element_onchange = () => {
-  // SET ONCHANGE FOR INDIVIDUAL INPUTS
-  element_array.forEach(ele => {
-    ele.onclick = () => { set_color(ele, true) }
-  })
+  set_click_fns()
   
   color_input.onchange = () => {
     brushes[active_brush] = color_input.value
     brush_eles[active_brush].style.backgroundColor = color_input.value
+    document.cookie = brushes
   }
 
   brush_eles.forEach((ele, ind) => {
     ele.onclick = () => { set_active(ind) }
+    ele.ondblclick = () => { 
+      set_active(ind)
+      color_input.click()
+    }
   })
 }
 
@@ -133,6 +154,37 @@ const update_lp = (payload) => {
   let { regions, buttons } = payload
   lp.buttons = buttons
   lp.regions = regions
+}
+
+// GET BRUSHES
+const brushes_cookie = () => {
+  return document.cookie
+    ? document.cookie.split(',')
+    : false
+}
+
+// EMPTY BRUSHES ARR
+const brushes = brushes_cookie()
+  ? brushes_cookie()
+  : blank_brushes
+
+// TOGGLE EYEDROPPER
+export const toggle_eyedrop = () => {
+  if (eyedrop_status) eyedrop_ele.classList.remove('selected')
+  if (!eyedrop_status) eyedrop_ele.classList.add('selected')
+  eyedrop_status = !eyedrop_status 
+  set_click_fns()
+}
+
+// UPDATE THE DOM WITH NEW VALUES
+const update_dom = () => {
+  element_array.forEach(ele => {
+    set_color(ele, false)
+  })
+  color_input.value = brushes[active_brush]
+  brush_eles.forEach((ele, ind) => {
+    ele.style.backgroundColor = brushes[ind]
+  })
 }
 
 
@@ -160,4 +212,3 @@ socket.on('reset', () => {
   color_input.value = black
   update_dom()
 })
-

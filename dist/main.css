@@ -10,7 +10,7 @@ body {
 .container {
     box-sizing: border-box;
     width: 500px;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0 auto;
     background: #e6e6e6;
     padding: 1em;
@@ -74,6 +74,7 @@ input[type="color"] {
     /* display: inline-block; */
     border: 3px solid grey;
     color: white;
+    cursor: pointer;
 }
 
 .brush.selected {

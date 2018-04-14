@@ -1,8 +1,10 @@
 // REGEX
 export const hex_regex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i
+export const rgb_regex = /^rgb\((\d+),\s?(\d+),\s(\d+)\)?$/i
 
 // CHECK HEX STRING FOR VALID COLOR
 export const is_valid_hex = (hex_string) => hex_regex.test(hex_string)
+export const is_valid_rgb = (rgb_str) => rgb_regex.test(rgb_str)
 
 // RESCALE RGB VALUES FOR LAUNCHPAD
 export const scale_to_lp = (num) => (num * 63) / 255
@@ -25,4 +27,21 @@ export const hex_to_lp = (hex_string) => {
       b: rgb_array[2],
     }
   } else { return { r: 0, g: 0, b: 0 } }
+}
+
+const num_to_hex = (num_str) => {
+  let hex = num_str.toString(16)
+  if (hex.length === 1) return '0' + hex
+  return hex
+}
+
+export const rgb_to_hex = (rgb_str) => {
+  if (is_valid_rgb(rgb_str)) {
+    let matches = rgb_regex.exec(rgb_str)
+    let values = [matches[1], matches[2], matches[3]]
+    let hex_chunks = values
+      .map(item => parseInt(item))
+      .map(item => num_to_hex(item))
+    return `#${hex_chunks.join('')}` 
+  } else { return '#000000'}
 }
