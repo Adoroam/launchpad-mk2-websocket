@@ -41,6 +41,9 @@ const eyedrop_ele = document.getElementById('eyedrop')
 // BODY ELEMENT
 const body_ele = document.getElementById('body')
 
+// E BUTTON
+const e_ele = document.getElementById('e')
+
 // ARRAY OF BRUSH ELEMENTS
 const brush_eles = blank_brushes.map((item, ind) => document.getElementById(`b_${ind}`))
 
@@ -80,6 +83,10 @@ export const handle_keypress = (ev) => {
   }
   if (code === 'KeyE') color_input.click()
 }
+
+// SET E TO OPEN COLOR PICKER
+e_ele.onclick = () => color_input.click()
+
 body_ele.onkeypress = handle_keypress
 
 // FUNCTION FOR ARRAY OF ALL ELEMENTS
